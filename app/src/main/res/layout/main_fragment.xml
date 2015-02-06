@@ -1,0 +1,59 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="arudra.mycompany.com.assignment3.Main"
+    android:id="@+id/main_frag"
+    android:orientation="vertical"
+    android:background="#000"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_weight="2"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:paddingTop="45sp"
+        android:id="@+id/title"
+        android:text="@string/title"
+        android:textSize="45sp"
+        android:textColor="#003060"
+    />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+        <Button
+            android:layout_gravity="center_horizontal"
+            android:layout_width="180sp"
+            android:layout_height="80sp"
+            android:id="@+id/picture_mode"
+            android:text="@string/pic"
+            android:textColor="#003060"
+            android:textSize="20sp"
+            android:background="#ffffffff"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:onClick="onClickPictureMode"
+            />
+
+        <Button
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="180sp"
+            android:layout_height="80sp"
+            android:id="@+id/gallery_mode"
+            android:text="@string/gallery"
+            android:textColor="#003060"
+            android:textSize="20sp"
+            android:background="#ffffffff"
+            android:onClick="onClickGalleryMode"
+            />
+        </LinearLayout>
+
+</LinearLayout>
