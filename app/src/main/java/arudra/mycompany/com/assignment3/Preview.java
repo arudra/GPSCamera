@@ -49,6 +49,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h)
     {
+        Log.d("Surface","Surface Changed");
         //preview surface not created
         if (mHolder.getSurface() == null) { return; }
 
@@ -93,11 +94,13 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback
             result = (cameraInfo.orientation - degrees + 360) % 360;
         }
 
+        Log.d("Camera Info","Camera orientation : " + cameraInfo.orientation
+                + " Rotation: " + rotation + " Result: " + result);
         //Restart Preview
         try {
             //mCamera.setPreviewDisplay(mHolder);
             mCamera.setDisplayOrientation(result);
-            //mCamera.setParameters(parameters);
+            mCamera.setParameters(parameters);
             mCamera.startPreview();
         } catch(Exception e) {
             e.printStackTrace();

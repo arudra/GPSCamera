@@ -1,12 +1,13 @@
 package arudra.mycompany.com.assignment3;
 
-import android.os.Debug;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.drive.Drive;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -16,11 +17,18 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Drive.API)
+                .addScope(Drive.SCOPE_FILE)
+                .build();
+
         //Start Main Fragment
         Main NewFragment = new Main();
         NewFragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,NewFragment).commit();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

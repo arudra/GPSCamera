@@ -87,7 +87,7 @@ public class Picture extends android.support.v4.app.Fragment implements SensorEv
         if (delta > 10)
         {
             //Stop Detection
-            //sensorManager.unregisterListener(this);
+            sensorManager.unregisterListener(this);
             Toast.makeText(getActivity().getApplicationContext(), "Taking a Picture in 3...2...1", Toast.LENGTH_SHORT).show();
 
             //Run on another thread which will delay by one second
@@ -103,7 +103,7 @@ public class Picture extends android.support.v4.app.Fragment implements SensorEv
             }, 3000);
 
 
-            //sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
 
