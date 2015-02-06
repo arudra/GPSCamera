@@ -102,9 +102,7 @@ public class Picture extends android.support.v4.app.Fragment implements SensorEv
                 }
             }, 3000);
 
-            //Restart Preview + detection
-            //shutterBtnConfig();
-            mCamera.startPreview();
+
             //sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
         }
     }

@@ -22,6 +22,7 @@ public class PhotoHandler implements Camera.PictureCallback
     @Override
     public void onPictureTaken(byte[] data, Camera camera)
     {
+        camera.startPreview();  //Restart Preview
         File picFileDir = context.getExternalFilesDir(null);
         if (picFileDir == null || (!picFileDir.exists() && !picFileDir.mkdirs()))
         {
