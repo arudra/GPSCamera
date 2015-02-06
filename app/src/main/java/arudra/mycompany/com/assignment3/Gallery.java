@@ -1,12 +1,14 @@
 package arudra.mycompany.com.assignment3;
 
-import android.app.Activity;
-import android.net.Uri;
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
 
 
 /**
@@ -23,6 +25,9 @@ public class Gallery extends android.support.v4.app.Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Context context = getActivity().getApplicationContext();
+    private final PictureInfo info = PictureInfo.getInstance();
 
     /**
      * Use this factory method to create a new instance of
@@ -47,13 +52,31 @@ public class Gallery extends android.support.v4.app.Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        //Set the Gridview in the XML
+        GridView gridView = (GridView) getActivity().findViewById(R.id.grid);
+
+        //Setup Adapter
+        gridView.setAdapter(new ImageAdapter(context));
+
+        //Display Location Picture was taken
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText(context,
+                        "" + info.ReadLocation(position),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,4 +84,6 @@ public class Gallery extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.gallery_fragment, container, false);
     }
+
+
 }

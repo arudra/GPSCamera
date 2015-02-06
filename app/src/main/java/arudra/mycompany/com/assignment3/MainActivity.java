@@ -3,11 +3,16 @@ package arudra.mycompany.com.assignment3;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.drive.Drive;
+
+import java.io.File;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -22,13 +27,34 @@ public class MainActivity extends ActionBarActivity {
                 .addScope(Drive.SCOPE_FILE)
                 .build();
 
+        //Read file Directory and fill up global array
+        FillPictureInfo();
+
         //Start Main Fragment
         Main NewFragment = new Main();
         NewFragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,NewFragment).commit();
     }
 
+    //Adding All Image file names to PictureInfo
+    private void FillPictureInfo()
+    {
+        PictureInfo info = PictureInfo.getInstance();
+        File folder = this.getExternalFilesDir(null);
 
+        if (folder == null || (!folder.exists() && !folder.mkdirs()))
+        {
+            Log.d("File Dir", "Couldn't find File Directory");
+            Toast.makeText(this, "Can't find directory to read images!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            for (final File fileEntry : folder.listFiles())
+            {
+                info.AddFile(fileEntry.getName());
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

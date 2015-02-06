@@ -88,7 +88,9 @@ public class Picture extends android.support.v4.app.Fragment implements SensorEv
         {
             //Stop Detection
             sensorManager.unregisterListener(this);
-            Toast.makeText(getActivity().getApplicationContext(), "Taking a Picture in 3...2...1", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Taking a Picture in 3..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "2..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "1..", Toast.LENGTH_SHORT).show();
 
             //Run on another thread which will delay by one second
             final Handler handler = new Handler();
@@ -100,7 +102,7 @@ public class Picture extends android.support.v4.app.Fragment implements SensorEv
                         mCamera.takePicture(null, null, null, new PhotoHandler(getActivity().getApplicationContext()));
                     } catch (Exception e) { e.printStackTrace(); }
                 }
-            }, 3000);
+            }, 1000);
 
 
             sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
