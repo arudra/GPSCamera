@@ -86,13 +86,12 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback
                 break;
         }
         int result;
-        if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT ) {
+        if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT )
+        {
             result = (cameraInfo.orientation + degrees) %360;
             result = (360 - result) % 360;
         }
-        else {
-            result = (cameraInfo.orientation - degrees + 360) % 360;
-        }
+        else { result = (cameraInfo.orientation - degrees + 360) % 360;  }
 
         Log.d("Camera Info","Camera orientation : " + cameraInfo.orientation
                 + " Rotation: " + rotation + " Result: " + result);
@@ -100,7 +99,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback
         try {
             //mCamera.setPreviewDisplay(mHolder);
             mCamera.setDisplayOrientation(result);
-            mCamera.setParameters(parameters);
+            //mCamera.setParameters(parameters);
             mCamera.startPreview();
         } catch(Exception e) {
             e.printStackTrace();

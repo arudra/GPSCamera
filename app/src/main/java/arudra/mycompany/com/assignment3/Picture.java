@@ -26,7 +26,6 @@ public class Picture extends android.support.v4.app.Fragment implements SensorEv
     private Preview mPreview; //Camera Preview
 
     private SensorManager sensorManager;
-    private long lastUpdate;
     private double newAccel, defaultAccel;
 
 
@@ -88,9 +87,7 @@ public class Picture extends android.support.v4.app.Fragment implements SensorEv
         {
             //Stop Detection
             sensorManager.unregisterListener(this);
-            Toast.makeText(getActivity().getApplicationContext(), "Taking a Picture in 3..", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getActivity().getApplicationContext(), "2..", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getActivity().getApplicationContext(), "1..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Taking a Picture in 1 second", Toast.LENGTH_SHORT).show();
 
             //Run on another thread which will delay by one second
             final Handler handler = new Handler();
