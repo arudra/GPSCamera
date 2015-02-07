@@ -84,7 +84,6 @@ public class Gallery extends android.support.v4.app.Fragment
         for(int i = 0; i < info.GetSize(); i++)
         {
             image = BitmapFactory.decodeFile(info.ReadFile(i)); //Convert images from JPEG to BMP to display
-            //Bitmap scaled = Bitmap.createScaledBitmap(original, newWidth, newHeight, true);
             thumbImage.add(new BitmapDrawable(context.getResources(), image));
         }
 
@@ -95,16 +94,6 @@ public class Gallery extends android.support.v4.app.Fragment
         try {
             gridView.setAdapter(imageAdapter);
         } catch(Exception e) { e.printStackTrace(); }
-
-        //Display Location Picture was taken
-        /*
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(context,
-                        "" + info.ReadLocation(position),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
         return rootView;
     }

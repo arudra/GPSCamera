@@ -154,6 +154,7 @@ public class Picture extends android.support.v4.app.Fragment implements SensorEv
     {
         try {
             if(mCamera != null){
+                mCamera.stopPreview();
                 mCamera.release();
                 mCamera = null;
                 Log.d("Camera","Camera Closed");

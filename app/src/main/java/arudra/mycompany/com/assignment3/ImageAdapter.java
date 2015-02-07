@@ -44,13 +44,6 @@ public class ImageAdapter extends ArrayAdapter<Drawable>
             view = inflater.inflate(R.layout.gridview_item, parent, false);
             view.setTag(R.id.picture, view.findViewById(R.id.picture));
             view.setTag(R.id.text, view.findViewById(R.id.text));
-            /*
-            picture = new ImageView(mContext);
-            picture.setLayoutParams(new GridView.LayoutParams(85, 85));
-            picture.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            picture.setPadding(8, 8, 8, 8);
-        } else {
-            picture = (ImageView) convertView; */
         }
 
         picture = (ImageView) view.getTag(R.id.picture);

@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.Camera;
 import android.util.Log;
+import android.view.Display;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.WindowManager;
+
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Abhishek on 2/3/2015.
@@ -44,7 +48,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback
 
     public void surfaceDestroyed(SurfaceHolder holder)
     {
-        Log.d("Surface","Surface was destroyed");
+        Log.d("Surface","Surface destroyed");
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h)
@@ -53,58 +57,45 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback
         //preview surface not created
         if (mHolder.getSurface() == null) { return; }
 
-        //Stop Preview
-        /*
-        try {
-            mCamera.stopPreview();
-        } catch (Exception e) {
-            e.printStackTrace(); //started a preview that didn't exist
-        } */
-
         //Rotate Preview + Camera
         Camera.Parameters parameters = mCamera.getParameters();
+        //Get Supported Preview Sizes
+        //List<Camera.Size> previewSizes = parameters.getSupportedPreviewSizes();
+        Camera.Size previewSize = parameters.getPreviewSize();//previewSizes.get(2);
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+        Display display = ((WindowManager)activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         Camera.getCameraInfo(0,cameraInfo);
-        int rotation = this.activity.getWindowManager().getDefaultDisplay().getRotation();
-        int degrees = 0;
+        int rotation = display.getRotation();
+
         switch(rotation) {
             case Surface.ROTATION_0:
-                degrees = 0;
-                parameters.setPreviewSize(h,w);
+                parameters.setPreviewSize(previewSize.height,previewSize.width);
+                mCamera.setDisplayOrientation(90);
                 break;
             case Surface.ROTATION_90:
-                degrees = 90;
-                parameters.setPreviewSize(w,h);
+                parameters.setPreviewSize(previewSize.width,previewSize.height);
                 break;
             case Surface.ROTATION_180:
-                degrees = 180;
-                parameters.setPreviewSize(h,w);
+                parameters.setPreviewSize(previewSize.height,previewSize.width);
                 break;
             case Surface.ROTATION_270:
-                degrees = 270;
-                parameters.setPreviewSize(w,h);
+                parameters.setPreviewSize(previewSize.width,previewSize.height);
+                mCamera.setDisplayOrientation(180);
                 break;
         }
-        int result;
-        if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT )
-        {
-            result = (cameraInfo.orientation + degrees) %360;
-            result = (360 - result) % 360;
-        }
-        else { result = (cameraInfo.orientation - degrees + 360) % 360;  }
+        Log.d("Preview","Width:" + previewSize.width  + " Height:" + previewSize.height);
+        Log.d("Preview","Camera orientation : " + cameraInfo.orientation);
 
-        Log.d("Camera Info","Camera orientation : " + cameraInfo.orientation
-                + " Rotation: " + rotation + " Result: " + result);
         //Restart Preview
         try {
-            //mCamera.setPreviewDisplay(mHolder);
-            mCamera.setDisplayOrientation(result);
-            //mCamera.setParameters(parameters);
+            mCamera.setParameters(parameters);
+            mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
-        } catch(Exception e) {
+        } catch(Exception e)
+        {
             e.printStackTrace();
+            Log.d("Preview","Preview change failed");
         }
-
     }
 
 }
