@@ -41,7 +41,7 @@ public class PhotoHandler implements Camera.PictureCallback
             //Save File path + GPS to ArrayLists
             PictureInfo info = PictureInfo.getInstance();
             info.AddFile(filename);
-            info.AddLocation("default");
+            info.AddLocation("" + info.GetSize());
 
             try {
                 FileOutputStream fos = new FileOutputStream(picFile);

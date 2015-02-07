@@ -5,12 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -19,32 +21,44 @@ import java.util.ArrayList;
  */
 public class ImageAdapter extends ArrayAdapter<Drawable>
 {
-    private Context mContext;
-    private PictureInfo info;
+    private PictureInfo info = PictureInfo.getInstance();
     private ArrayList<Drawable> thumbImage;
+    private LayoutInflater inflater;
 
     public ImageAdapter(Context c, ArrayList<Drawable> thumbImage)
     {
         super(c ,R.layout.gallery_fragment, thumbImage);
-        mContext = c;
+        inflater = LayoutInflater.from(c);
         this.thumbImage = thumbImage;
     }
 
 
     // create a new ImageView for each item referenced by the Adapter
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(int position, View view, ViewGroup parent)
     {
-        ImageView imageView;
-        if (convertView == null) {  // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+        ImageView picture;
+        TextView name;
+
+        if (view == null)
+        {  // if it's not recycled, initialize some attributes
+            view = inflater.inflate(R.layout.gridview_item, parent, false);
+            view.setTag(R.id.picture, view.findViewById(R.id.picture));
+            view.setTag(R.id.text, view.findViewById(R.id.text));
+            /*
+            picture = new ImageView(mContext);
+            picture.setLayoutParams(new GridView.LayoutParams(85, 85));
+            picture.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            picture.setPadding(8, 8, 8, 8);
         } else {
-            imageView = (ImageView) convertView;
+            picture = (ImageView) convertView; */
         }
 
-        imageView.setImageDrawable(thumbImage.get(position));
-        return imageView;
+        picture = (ImageView) view.getTag(R.id.picture);
+        name = (TextView) view.getTag(R.id.text);
+
+        picture.setImageDrawable(thumbImage.get(position));
+        name.setText(info.ReadLocation(position));
+
+        return view;
     }
 }

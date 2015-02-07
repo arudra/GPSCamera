@@ -41,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
     {
         PictureInfo info = PictureInfo.getInstance();
         File folder = this.getExternalFilesDir(null);
+        int i = 0;
 
         if (folder == null || (!folder.exists() && !folder.mkdirs()))
         {
@@ -52,7 +53,9 @@ public class MainActivity extends ActionBarActivity {
             for (final File fileEntry : folder.listFiles())
             {
                 info.AddFile(folder.getAbsolutePath() + File.separator + fileEntry.getName());
-                Log.d("Files",""+ folder.getAbsolutePath() + File.separator + fileEntry.getName());
+                info.AddLocation("" + info.GetSize());
+                i++;
+                //Log.d("Files",""+ folder.getAbsolutePath() + File.separator + fileEntry.getName());
             }
         }
     }

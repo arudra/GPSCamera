@@ -9,13 +9,13 @@
 
     <GridView
         android:id="@+id/grid"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:columnWidth="100sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:numColumns="2"
-        android:verticalSpacing="10sp"
-        android:horizontalSpacing="10sp"
+        android:verticalSpacing="0dp"
+        android:horizontalSpacing="0dp"
         android:gravity="center"
+        android:stretchMode="columnWidth"
         >
 
     </GridView>
