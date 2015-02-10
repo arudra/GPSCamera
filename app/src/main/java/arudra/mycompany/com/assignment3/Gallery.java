@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +106,10 @@ public class Gallery extends android.support.v4.app.Fragment
                             public void onClick(DialogInterface dialog, int which) {
                                 //Delete the image
                                 info.DeleteFile(position);
+                                android.support.v4.app.Fragment fragment = new Main();
+                                getFragmentManager()
+                                        .beginTransaction().replace(R.id.fragment_container,fragment)
+                                        .commit();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -112,6 +117,7 @@ public class Gallery extends android.support.v4.app.Fragment
                             public void onClick(DialogInterface dialog, int which) { /*Do nothing*/ }
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert).show();
+
             }
         });
         return rootView;
