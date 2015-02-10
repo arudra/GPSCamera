@@ -2,6 +2,7 @@ package arudra.mycompany.com.assignment3;
 
 import android.util.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -43,6 +44,15 @@ public class PictureInfo
     public String ReadFile(int index) { return FilePath.get(index); }
 
     public String ReadLocation(int index) { return Location.get(index); }
+
+    public void DeleteFile (int index)
+    {
+        File file = new File(FilePath.get(index));
+        boolean ret = file.delete();
+
+        FilePath.remove(index);
+        Location.remove(index);
+    }
 
 
 

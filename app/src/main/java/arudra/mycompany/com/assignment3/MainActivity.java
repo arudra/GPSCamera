@@ -55,7 +55,6 @@ public class MainActivity extends ActionBarActivity {
                 info.AddFile(folder.getAbsolutePath() + File.separator + fileEntry.getName());
                 info.AddLocation("" + info.GetSize());
                 i++;
-                //Log.d("Files",""+ folder.getAbsolutePath() + File.separator + fileEntry.getName());
             }
         }
     }

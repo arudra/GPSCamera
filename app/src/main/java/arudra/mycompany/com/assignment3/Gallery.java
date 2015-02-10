@@ -1,21 +1,20 @@
 package arudra.mycompany.com.assignment3;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 
@@ -95,6 +94,26 @@ public class Gallery extends android.support.v4.app.Fragment
             gridView.setAdapter(imageAdapter);
         } catch(Exception e) { e.printStackTrace(); }
 
+        //Delete an image
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
+                new AlertDialog.Builder(activity)
+                        .setTitle("Delete Image")
+                        .setMessage("Do you want to delete this image?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Delete the image
+                                info.DeleteFile(position);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) { /*Do nothing*/ }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert).show();
+            }
+        });
         return rootView;
     }
 

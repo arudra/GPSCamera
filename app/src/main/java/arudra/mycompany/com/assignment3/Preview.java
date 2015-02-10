@@ -9,9 +9,8 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
-
 import java.io.IOException;
-import java.util.List;
+
 
 /**
  * Created by Abhishek on 2/3/2015.
@@ -37,7 +36,6 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceCreated(SurfaceHolder holder)
     {
         //Surface Created -> camera should draw the preview
-        Log.d("Surface","Surface was created");
         try {
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
@@ -46,14 +44,10 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
-    public void surfaceDestroyed(SurfaceHolder holder)
-    {
-        Log.d("Surface","Surface destroyed");
-    }
+    public void surfaceDestroyed(SurfaceHolder holder) {  }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h)
     {
-        Log.d("Surface","Surface Changed");
         //preview surface not created
         if (mHolder.getSurface() == null) { return; }
 

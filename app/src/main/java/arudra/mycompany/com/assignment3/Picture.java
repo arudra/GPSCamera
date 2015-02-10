@@ -38,9 +38,7 @@ public class Picture extends android.support.v4.app.Fragment implements SensorEv
         return fragment;
     }
 
-    public Picture() {
-        // Required empty public constructor
-    }
+    public Picture() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState)
